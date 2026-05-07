@@ -2,10 +2,10 @@ export default function ProjectCard({ project }) {
   return (
     <div className="project-card">
       <h3>{project.title}</h3>
-      <p>{project.description}</p>
-      <a href={project.link} target="_blank" rel="noopener noreferrer">
+      <p>{project.category}</p>
+      <p href={project.image}>
         View Project
-      </a>
+      </p>
     </div>
   );
 }
