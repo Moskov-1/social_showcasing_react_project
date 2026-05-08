@@ -10,7 +10,7 @@ export function Projects(){
         <>
             <div>
                 {projectsData.map(item => {
-                    <ProjectCard key={item.id} project={item}/>
+                    return <ProjectCard key={item.id} project={item}/>;
                 })}
                 <div >
                     <button onClick={()=>setCurrentPage(x=> {
