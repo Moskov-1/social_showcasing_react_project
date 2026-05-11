@@ -5,6 +5,7 @@ import { Activities } from './pages/Activities';
 import { BlogDetails } from './pages/BlogDetails';
 import { ActivityDetails } from './pages/ActivityDetails';
 import Blogs from './pages/Blogs';
+import { Gallery } from './pages/Gallery';
 
 function App() {
 
@@ -16,6 +17,9 @@ function App() {
       <Route path="/blogs/:id" element={<BlogDetails />} />
       <Route path="/activities" element={<Activities />} />
       <Route path="/activities/:id" element={<ActivityDetails />} />
+
+      <Route path="/gallery" element={<Gallery />} />
+      <Route path={'/gallery:gallery_id'} element={}></Route>
     </Routes>
   );
 }
