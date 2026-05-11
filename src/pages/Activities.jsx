@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { AcitvitiesData } from "../data/ActivitiesData";
+import { Link } from 'react-router';
 
 export const Activities = () => {
     const [activities, setActivities] = useState([]);
     useEffect(() => {
         setTimeout(() => {
-            return setActivities(AcitvitiesData);
+            return setActivities(ActivitiesData);
         }, 2000)
     }, []);
 

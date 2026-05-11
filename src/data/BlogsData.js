@@ -1,4 +1,4 @@
-export const BLOGS = [
+const BlogData = [
   { 
     id: 1, 
     title: "Supporting Rural Education", 
@@ -12,3 +12,4 @@ export const BLOGS = [
     image: "https://via.placeholder.com/300" 
   },
 ];
+export default BlogData;

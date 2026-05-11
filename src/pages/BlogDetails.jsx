@@ -1,8 +1,12 @@
-import {BlogsData} from '../data/BlogsData';
+import BlogData from "../data/BlogsData";
+import { Link } from 'react-router';
+import { useParams } from "react-router-dom"
 
-const BlogDetails = () => {
+ 
+
+export const BlogDetails = () => {
     const { id } = useParams();
-    const blog = BlogsData.find(b => b.id === parseInt(id));
+    const blog = BlogData.find(b => b.id === parseInt(id));
     
     if (!blog) return <div className="text-center py-20">Blog post not found.</div>;
     

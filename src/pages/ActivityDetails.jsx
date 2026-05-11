@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom"
 import { AcitvitiesData } from "../data/ActivitiesData";
+import { Link } from 'react-router';
 
 export const ActivityDetails = () => {
     const {id} = useParams();

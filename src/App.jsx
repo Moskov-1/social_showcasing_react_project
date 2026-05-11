@@ -1,8 +1,10 @@
 import Home from './pages/Home'
 import { Routes, Route } from 'react-router-dom';
-import { Projects } from './pages/Projects';
+import { Projects } from './pages/Projects'; 
+import { Activities } from './pages/Activities'; 
 import { BlogDetails } from './pages/BlogDetails';
 import { ActivityDetails } from './pages/ActivityDetails';
+import Blogs from './pages/Blogs';
 
 function App() {
 

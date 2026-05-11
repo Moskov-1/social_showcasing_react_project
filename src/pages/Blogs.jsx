@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import BlogsData from '../data/BlogsData';
 import { Link } from 'react-router';
+
 export default function Blogs(){
     const [blogs, setBlogs] = useState([]);
 
     useEffect(() => {
         // Simulate fetching data from an API
         setTimeout(() => {
-            setBlogs(BLOGS);
+            setBlogs(BlogsData);
         }, 1000);
     }, []);
 
