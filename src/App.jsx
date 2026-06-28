@@ -19,7 +19,7 @@ function App() {
       <Route path="/activities/:id" element={<ActivityDetails />} />
 
       <Route path="/gallery" element={<Gallery />} />
-      <Route path={'/gallery:gallery_id'} element={}></Route>
+      <Route path={'/gallery/:gallery_id'} element={<Gallery/>}></Route>
     </Routes>
   );
 }
