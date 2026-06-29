@@ -1,4 +1,8 @@
 
+import PeopleCard from '../components/PeopleCard';
+import PlaceCard from '../components/PlaceCard';
+import MemberCard from '../components/MemberCard';
+
 
 export default function About() {
   return (
@@ -14,6 +18,45 @@ export default function About() {
         <p className="text-lg leading-relaxed text-gray-700 mb-6">
             Thank you for visiting our platform. We hope you find inspiration, connect with like-minded individuals, and contribute to the vibrant community we are building together.
         </p>
+    
+        <div className='row-auto'>
+            <div className="bg-white shadow-md rounded-lg p-6 mb-6">
+                <img src="/path/to/your/image.jpg" alt="Community Engagement" className="w-full h-auto rounded-lg mb-4" />
+                <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
+                <p className="text-lg leading-relaxed text-gray-700 mb-6">
+                    Our mission is to foster a sense of community and encourage active participation in social initiatives. We aim to provide a platform where people can discover, engage, and contribute to projects that make a positive impact on society.
+                </p>
+            </div>
+            <div className="bg-white shadow-md rounded-lg p-6 mb-6">
+                <img src="/path/to/your/image.jpg" alt="Community Engagement" className="w-full h-auto rounded-lg mb-4" />
+                <h2 className="text-2xl font-semibold mb-4">Our Vision</h2>
+                <p className="text-lg leading-relaxed text-gray-700 mb-6">
+                    Our vision is to create a world where everyone has the opportunity to participate in meaningful social activities and make a positive difference in their communities.
+                </p>
+            </div>
+        </div>
+
+        <div className="mt-12">
+            <h1>Historical places</h1>
+            {historicalPlaces.map((place) => (
+                <PlaceCard key={place.id} place={place} />
+            ))}
+        </div>
+        
+        <div className="mt-12">
+            <h1>Notable People</h1>
+            {notablePeople.map((person) => (
+                <PeopleCard key={person.id} person={person} />
+            ))}
+        </div>
+
+        <div className="mt-12">
+            <h1>Members</h1>
+            {members.map((member) => (
+                <MemberCard key={member.id} member={member} />
+            ))}
+        </div>
     </div>
+
   );
 }

@@ -4,11 +4,12 @@ import {Slide} from '../components/Slide';
 import {SlidesData} from '../data/SlidesData';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
-
-
+import {projectsData} from '../data/ProjectsData';
+import ProjectCard from '../components/ProjectCard';
 
 function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const projects = projectsData.slice(0, 3); 
 
   useEffect(() => {
     if (SlidesData.length === 0) return;
@@ -56,7 +57,15 @@ function Home() {
           />
         ))}
       </div>
+
+      <h2 className="text-2xl font-bold mb-8">Our Projects</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {projects.map((project) => (
+          <ProjectCard key={project.id} project={project} />
+        ))}
+      </div>
     </div>
   );
 }
 export default Home;
+            
