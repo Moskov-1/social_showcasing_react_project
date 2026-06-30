@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import {projectsData} from '../data/projectsData';
 import ProjectCard from '../components/ProjectCard';
 import { Footer } from '../components/Footer';
+import { BlogCard } from '../components/BlogCard';
 
 function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -34,7 +35,8 @@ function Home() {
     return () => clearInterval(interval);
   }, []);
 
-  console.log('Fetched data:', data);
+  // console.log('Fetched data:', data);
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
       
@@ -61,6 +63,12 @@ function Home() {
         ))}
       </div>
 
+      <h2 className="text-2xl font-bold mb-8 mt-12">Latest Blogs</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {data?.blogs?.map((blog) => (
+          <BlogCard key={blog.id} blog={blog} />
+        ))}
+      </div>
     </div>
   );
 }

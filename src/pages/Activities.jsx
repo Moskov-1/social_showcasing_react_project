@@ -4,22 +4,32 @@ import { Link } from 'react-router';
 import { ActivitiesCard } from "../components/ActivitiesCard";
 
 export const Activities = () => {
-    const [activities, setActivities] = useState([]);
+    const [activities, setActivities] = useState({
+        activities: []
+    });
+
     useEffect(() => {
-        setTimeout(() => {
-            return setActivities(ActivitiesData);
-        }, 2000)
+        const fetchActivities = async () => {
+            try{
+                const response = await fetch("https://social-activity-admin.onrender.com/api/v1/activities/bn");
+                const result = await response.json();
+                setActivities(result);
+            } catch (error) {
+                console.error('Error fetching activities:', error);
+            }
+        };
+        
+        fetchActivities();
     }, []);
 
     return (
         <>
             <div>
                 <h1>Activities</h1>
-                <div>
-                    {activities.map(activity => {
-                        return <ActivitiesCard key={activity.id} activity={activity} />
-                        
-                    })}
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    {activities['activities'].map(activity => (
+                        <ActivitiesCard key={activity.id} activity={activity} />
+                    ))}
                 </div>
             </div>
         </>
