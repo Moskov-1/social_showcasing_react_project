@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import {projectsData} from '../data/ProjectsData';
 import ProjectCard from '../components/ProjectCard';
+import { Footer } from '../components/Footer';
 
 function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -64,6 +65,8 @@ function Home() {
           <ProjectCard key={project.id} project={project} />
         ))}
       </div>
+
+      <Footer />
     </div>
   );
 }
