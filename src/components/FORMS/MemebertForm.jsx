@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-export default  function MemebertForm() {
+export default function MemebertForm() {
     async function handleSubmit(event) {
         event.preventDefault();
-        
+
         const data = new FormData();
         Object.keys(formData).forEach((key) => {
             data.append(key, formData[key]);
@@ -12,14 +12,14 @@ export default  function MemebertForm() {
         try {
             const response = await fetch('https://social-activity-admin.onrender.com/api/v1/request/bn', {
                 method: 'POST',
-                body: formData,
+                body: data,
             });
 
             if (response.ok) {
                 console.log('Upload successful!');
             }
         } catch (error) {
-        console.error('Error uploading:', error);
+            console.error('Error uploading:', error);
         }
     }
 
@@ -36,106 +36,77 @@ export default  function MemebertForm() {
 
     function handleChange(event) {
         const { name, value } = event.target;
-
         setFormData((prevFormData) => ({
             ...prevFormData,
             [name]: value,
         }));
     }
 
+    const fields = [
+        { name: "name", label: "Name", type: "text" },
+        { name: "father_name", label: "Father's Name", type: "text" },
+        { name: "mother_name", label: "Mother's Name", type: "text" },
+        { name: "bloodGroup", label: "Blood Group", type: "select", options: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"] },
+        { name: "address", label: "Address", type: "textarea" },
+        { name: "phone", label: "Phone", type: "tel" },
+        { name: "profession", label: "Profession", type: "text" },
+        { name: "NID", label: "NID", type: "text" },
+    ];
+
     return (
-        <>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Name</label>
-                    <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                    />
-                </div>
+        <div className="min-h-screen bg-gray-50 py-12 px-4">
+            <div className="max-w-2xl mx-auto">
+                <h1 className="text-3xl font-bold text-gray-900 text-center mb-2">Member Registration</h1>
+                <p className="text-gray-500 text-center mb-8">Fill out the form to join our community</p>
 
-                <div>
-                    <label>Father's Name</label>
-                    <input
-                        type="text"
-                        name="father_name"
-                        value={formData.father_name}
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <div>
-                    <label>Mother's Name</label>
-                    <input
-                        type="text"
-                        name="mother_name"
-                        value={formData.mother_name}
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <div>
-                    <label>Blood Group</label>
-                    <select
-                        name="bloodGroup"
-                        value={formData.bloodGroup}
-                        onChange={handleChange}
+                <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg p-8 space-y-6">
+                    {fields.map(({ name, label, type, options }) => (
+                        <div key={name}>
+                            <label htmlFor={name} className="block text-sm font-semibold text-gray-700 mb-1.5">
+                                {label}
+                            </label>
+                            {type === "select" ? (
+                                <select
+                                    id={name}
+                                    name={name}
+                                    value={formData[name]}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-white"
+                                >
+                                    <option value="">Select {label}</option>
+                                    {options.map((opt) => (
+                                        <option key={opt} value={opt}>{opt}</option>
+                                    ))}
+                                </select>
+                            ) : type === "textarea" ? (
+                                <textarea
+                                    id={name}
+                                    name={name}
+                                    value={formData[name]}
+                                    onChange={handleChange}
+                                    rows={3}
+                                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                                />
+                            ) : (
+                                <input
+                                    id={name}
+                                    type={type}
+                                    name={name}
+                                    value={formData[name]}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                                />
+                            )}
+                        </div>
+                    ))}
+                    <button
+                        type="submit"
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
                     >
-                        <option value="">Select Blood Group</option>
-                        <option value="A+">A+</option>
-                        <option value="A-">A-</option>
-                        <option value="B+">B+</option>
-                        <option value="B-">B-</option>
-                        <option value="AB+">AB+</option>
-                        <option value="AB-">AB-</option>
-                        <option value="O+">O+</option>
-                        <option value="O-">O-</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label>Address</label>
-                    <textarea
-                        name="address"
-                        value={formData.address}
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <div>
-                    <label>Phone</label>
-                    <input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <div>
-                    <label>Profession</label>
-                    <input
-                        type="text"
-                        name="profession"
-                        value={formData.profession}
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <div>
-                    <label>NID</label>
-                    <input
-                        type="text"
-                        name="NID"
-                        value={formData.NID}
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <button type="submit">Submit</button>
-            </form>
-        </>
+                        Submit Application
+                    </button>
+                </form>
+            </div>
+        </div>
     );
 }

@@ -1,11 +1,15 @@
-export default function PeopleCard({person}) {
-  return (
-    <div className="max-w-6xl mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-6">{person.name}</h1>
-      <img src={person.image_url} alt={person.name} className="w-full h-auto rounded-lg mb-4" /> 
-      <p className="text-lg leading-relaxed text-gray-700 mb-6">
-        {person.short_text}
-      </p>
-    </div>
-  );
+export default function PeopleCard({ person }) {
+    return (
+        <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+            <img
+                src={person.image_url}
+                alt={person.name}
+                className="w-full h-56 object-cover"
+            />
+            <div className="p-5">
+                <h3 className="text-lg font-bold text-gray-900">{person.name}</h3>
+                <p className="text-sm text-gray-600 mt-2 leading-relaxed">{person.short_text}</p>
+            </div>
+        </div>
+    );
 }
