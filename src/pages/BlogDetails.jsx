@@ -14,7 +14,7 @@ export const BlogDetails = () => {
             try {
                 const response = await fetch(`https://social-activity-admin.onrender.com/api/v1/blog/${id}/bn`);
                 const result = await response.json();
-                setBlog(result);
+                setBlog(result['blog'] || null);
             } catch (error) {
                 console.error('Error fetching blog:', error);
             }
@@ -22,6 +22,8 @@ export const BlogDetails = () => {
         fetchBlog();
     }, []);
     
+    console.log(blog);
+
     if (!blog) return <div className="text-center py-20">Blog post not found.</div>;
     
     return (

@@ -7,11 +7,24 @@ export default function Blogs(){
     const [blogs, setBlogs] = useState([]);
 
     useEffect(() => {
-        // Simulate fetching data from an API
-        setTimeout(() => {
-            setBlogs(BlogsData);
-        }, 1000);
+        const fetchBlogs = async () => {
+            try {
+                const response = await fetch(
+                    'https://social-activity-admin.onrender.com/api/v1/blogs/bn'
+                );
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setBlogs(data['blogs'] || []);
+            } catch (error) {
+                console.error('Error fetching blogs:', error);
+            }
+        }   
+        fetchBlogs();
     }, []);
+
+    console.log('Fetched blogs:', blogs);
 
     return (
         <div className="max-w-6xl mx-auto px-4 py-12">

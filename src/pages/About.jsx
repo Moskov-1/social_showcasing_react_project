@@ -1,11 +1,53 @@
 
+import { useState, useEffect } from 'react';
 import PeopleCard from '../components/PeopleCard';
 import PlaceCard from '../components/PlaceCard';
 import MemberCard from '../components/MemberCard';
-import {StatCard} from '../components/StatCard';
-import {StatsData} from '../data/StatsData';
+
 
 export default function About() {
+    const [data, setData] = useState({
+        mission: {},
+        vision: {},
+        edu: {},
+        historical_places: [],
+        notable_people: [],
+    });
+
+    const [members, setMembers] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(
+                    'https://social-activity-admin.onrender.com/api/v1/about/bn'
+                );
+
+                const data = await response.json();
+                setData(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        const fetchMembers = async () => {
+            try{
+                const response = await fetch(
+                    'https://social-activity-admin.onrender.com/api/v1/members/bn'
+                );
+                const membersData = await response.json();
+                setMembers(membersData['members'] || []);
+            } catch (error) {
+                console.error('Error fetching members:', error);
+            }
+        }
+
+        fetchData();
+        fetchMembers();
+    }, []);
+
+    const { mission, vision, edu, historical_places, notable_people } = data;
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
 
@@ -23,13 +65,22 @@ export default function About() {
               <h2 className="text-2xl font-bold mb-8">Our Impact at a Glance</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {StatsData.map((stat) => (
-                  <StatCard 
-                    key={stat.id} 
-                    label={stat.label} 
-                    value={stat.value} 
-                  />
-                ))}
+                <div className="bg-white shadow-md rounded-lg p-6 text-center">
+                  <h3 className="text-gray-500 text-sm font-medium uppercase tracking-wide">Schools</h3>
+                  <p className="text-3xl font-bold text-blue-600 mt-2">{edu?.school ?? 0}</p>
+                </div>
+                <div className="bg-white shadow-md rounded-lg p-6 text-center">
+                  <h3 className="text-gray-500 text-sm font-medium uppercase tracking-wide">Colleges</h3>
+                  <p className="text-3xl font-bold text-blue-600 mt-2">{edu?.college ?? 0}</p>
+                </div>
+                <div className="bg-white shadow-md rounded-lg p-6 text-center">
+                  <h3 className="text-gray-500 text-sm font-medium uppercase tracking-wide">Madrasha</h3>
+                  <p className="text-3xl font-bold text-blue-600 mt-2">{edu?.madrasha ?? 0}</p>
+                </div>
+                <div className="bg-white shadow-md rounded-lg p-6 text-center">
+                  <h3 className="text-gray-500 text-sm font-medium uppercase tracking-wide">Pass Rate</h3>
+                  <p className="text-3xl font-bold text-blue-600 mt-2">{edu?.pass_rate ?? 0}%</p>
+                </div>
               </div>
     
         <div className='row-auto'>
@@ -37,28 +88,32 @@ export default function About() {
                 <img src="/path/to/your/image.jpg" alt="Community Engagement" className="w-full h-auto rounded-lg mb-4" />
                 <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
                 <p className="text-lg leading-relaxed text-gray-700 mb-6">
-                    Our mission is to foster a sense of community and encourage active participation in social initiatives. We aim to provide a platform where people can discover, engage, and contribute to projects that make a positive impact on society.
+                    {mission?.content ||
+                     "Our mission is to foster a sense of community and encourage active participation in social activities that promote positive change."
+                     }
                 </p>
             </div>
             <div className="bg-white shadow-md rounded-lg p-6 mb-6">
                 <img src="/path/to/your/image.jpg" alt="Community Engagement" className="w-full h-auto rounded-lg mb-4" />
                 <h2 className="text-2xl font-semibold mb-4">Our Vision</h2>
                 <p className="text-lg leading-relaxed text-gray-700 mb-6">
-                    Our vision is to create a world where everyone has the opportunity to participate in meaningful social activities and make a positive difference in their communities.
+                    {vision?.content ||
+                     "Our vision is to create a world where everyone has the opportunity to participate in meaningful social activities and make a positive difference in their communities."
+                     }
                 </p>
             </div>
         </div>
 
         <div className="mt-12">
             <h1>Historical places</h1>
-            {historicalPlaces.map((place) => (
+            {historical_places.map((place) => (
                 <PlaceCard key={place.id} place={place} />
             ))}
         </div>
         
         <div className="mt-12">
             <h1>Notable People</h1>
-            {notablePeople.map((person) => (
+            {notable_people.map((person) => (
                 <PeopleCard key={person.id} person={person} />
             ))}
         </div>

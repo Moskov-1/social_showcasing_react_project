@@ -1,9 +1,26 @@
 import { useState } from "react";
 
-export default function MemebertForm() {
-    function handleSubmit(event) {
+export default  function MemebertForm() {
+    async function handleSubmit(event) {
         event.preventDefault();
-        console.log(formData);
+        
+        const data = new FormData();
+        Object.keys(formData).forEach((key) => {
+            data.append(key, formData[key]);
+        });
+
+        try {
+            const response = await fetch('https://social-activity-admin.onrender.com/api/v1/request/bn', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                console.log('Upload successful!');
+            }
+        } catch (error) {
+        console.error('Error uploading:', error);
+        }
     }
 
     const [formData, setFormData] = useState({

@@ -1,10 +1,24 @@
 import {projectsData} from '../data/projectsData';
 import ProjectCard from '../components/ProjectCard'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export function Projects(){
-    const [currentPage, setCurrentPage] = useState(1);
-    
+    const [projectsData, setProjectsData] = useState([]);
+    useEffect(()=>{
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`https://social-activity-admin.onrender.com/api/v1/projects/bn`);
+                const data = await response.json();
+                setProjectsData(data?.projects || []);
+            } catch (error) {
+                console.error('Error fetching projects:', error);
+            }
+        }
+        fetchData();
+    }, []);
+
+    console.log('projectsData:', projectsData);
+
     return (
   
         <>
@@ -12,18 +26,6 @@ export function Projects(){
                 {projectsData.map(item => {
                     return <ProjectCard key={item.id} project={item}/>;
                 })}
-                <div >
-                    <button onClick={()=>setCurrentPage(x=> {
-                        x--;
-                        if (x<1)x=1;
-                        return x;
-                    })}> less</button>
-                    {currentPage}
-                    <button onClick={()=>setCurrentPage((x)=>{
-                        x++;
-                        return x;
-                    })}> more</button>
-                </div>
             </div>
         </>
 
