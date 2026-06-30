@@ -3,7 +3,7 @@ import {Slide} from '../components/Slide';
 import {SlidesData} from '../data/SlidesData';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
-import {projectsData} from '../data/ProjectsData';
+import {projectsData} from '../data/projectsData';
 import ProjectCard from '../components/ProjectCard';
 import { Footer } from '../components/Footer';
 
