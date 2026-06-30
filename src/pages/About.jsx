@@ -2,7 +2,8 @@
 import PeopleCard from '../components/PeopleCard';
 import PlaceCard from '../components/PlaceCard';
 import MemberCard from '../components/MemberCard';
-
+import {StatCard} from '../components/StatCard';
+import {StatsData} from '../data/StatsData';
 
 export default function About() {
   return (
@@ -18,6 +19,18 @@ export default function About() {
         <p className="text-lg leading-relaxed text-gray-700 mb-6">
             Thank you for visiting our platform. We hope you find inspiration, connect with like-minded individuals, and contribute to the vibrant community we are building together.
         </p>
+
+              <h2 className="text-2xl font-bold mb-8">Our Impact at a Glance</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {StatsData.map((stat) => (
+                  <StatCard 
+                    key={stat.id} 
+                    label={stat.label} 
+                    value={stat.value} 
+                  />
+                ))}
+              </div>
     
         <div className='row-auto'>
             <div className="bg-white shadow-md rounded-lg p-6 mb-6">
