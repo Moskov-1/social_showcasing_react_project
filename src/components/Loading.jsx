@@ -1,8 +1,11 @@
 export function LoadingSpinner() {
     return (
         <div className="flex flex-col items-center justify-center py-24 text-gray-400">
-            <div className="w-10 h-10 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mb-4" />
-            <p className="text-sm">Loading...</p>
+            <svg className="w-10 h-10 text-blue-600 mb-4 animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 20L12 4L20 20" />
+                <path d="M4 20H20" />
+            </svg>
+            <p className="text-sm">Lambda server waking up...</p>
         </div>
     );
 }
